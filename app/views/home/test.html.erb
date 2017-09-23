@@ -1,0 +1,13 @@
+
+   
+     <%#= link_to "#{test.testname}", test_submit_path(testid: test) %>
+     <strong>All test</strong>
+     <%@test.tests.each do |test|%>
+     <p>
+     <strong>
+    <%#=test.testname%>
+     <%= link_to "#{test.testname}", test1_submit1_path(testid: test) %>
+    </strong>
+    </p>
+   <% end %>
+ 

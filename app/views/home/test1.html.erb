@@ -1,0 +1,62 @@
+<%#@testt1.questions.each do |q|%>
+
+
+<%#=q.qname%>
+
+<%#end%>
+
+
+
+<%= form_for :test, url: test_submit_user_path do |f| %>
+
+  <p>
+    <%#= f.label :city_name %><br>
+    <%#= f.text_field :city_name %>
+  </p>
+ 
+ 
+
+
+
+
+
+
+
+<p>
+  <% i = 1%>
+  <% @testt1.questions.each do |question| %>
+  <strong>Question <%=i%>:<%=question.qname%>,,</strong>
+   <% i = i+1%>
+  <%#= test.testname %>
+
+
+
+
+<p>
+  <% x = 1%>
+  <% question.answers.each do |answer| %>
+ 
+ 
+  
+   <strong>Answer <%=x%>:<%=answer.ansname%>  <%= f.check_box :"aname#{i+x}" %>,,</strong>
+  
+   <% x = x+1%>
+  <%#= test.testname %>
+
+<%end%>
+</p>
+
+
+
+
+
+
+<%end%>
+</p>
+
+<p>
+    <%= f.submit "Submit Test" %>
+  </p>
+<% end %>
+
+

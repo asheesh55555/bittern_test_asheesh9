@@ -1,0 +1,120 @@
+<%#= form_with(model: @testcategory, local: true) do |form| %>
+<%if current_user.admin == true%>
+<%= nested_form_for @testcategory do |form| %>
+  <% if @testcategory.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@testcategory.errors.count, "error") %> prohibited this testcategory from being saved:</h2>
+
+      <ul>
+      <% @testcategory.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :testcategoryname %>
+    <%= form.text_field :testcategoryname, id: :testcategory_testcategoryname %>
+  </div>
+
+
+
+
+
+
+<%= form.fields_for :tests do |task_form| %>
+  <%= task_form.text_field :testname %>
+  <%= task_form.link_to_remove "Remove this test" %>
+ 
+
+
+
+ <%= task_form.fields_for :questions do |task| %>
+  <%= task.text_field :qname %>
+  <%= task.link_to_remove "Remove this question" %>
+
+
+
+<%= task.fields_for :answers do |task1| %>
+  <%= task1.check_box :aname %>
+  <%= task1.text_field :ansname %>
+  <%= task1.link_to_remove "Remove this answer" %>
+<% end %>
+<p><%= task.link_to_add "Add an answer", :answers %></p>
+
+
+
+
+<% end %>
+<p><%= task_form.link_to_add "Add an question", :questions %></p>
+
+
+
+
+
+
+
+<% end %>
+<p><%= form.link_to_add "Add an test", :tests %></p>
+
+
+
+
+
+
+
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+
+
+
+
+
+
+
+
+<%else%>
+<p><strong>testcategories</strong></p>
+
+<% @testscat.each do |testcat| %>
+  <p><strong>
+     <%= link_to "#{testcat.testcategoryname}", test_submit_path(testid: testcat) %>
+   </strong></p>
+  <% end %>
+   
+ <p><strong>search test by category  </strong></p>
+
+   <%= form_for :catname, url: test_serch_by_cat_path do |f| %>
+
+  <p>
+    <%= f.label :category_name %><br>
+    <%= f.text_field :category_name %>
+  </p>
+ 
+ <p>
+    <%= f.submit "search"%>
+  </p>
+<% end %>
+
+
+
+<p><strong>search test by name  </strong></p>
+
+   <%= form_for :tname, url: test_serch_by_test_path do |f| %>
+
+  <p>
+    <%= f.label :test_name %><br>
+    <%= f.text_field :test_name %>
+  </p>
+ 
+ <p>
+    <%= f.submit "search" %>
+  </p>
+<% end %>
+
+  <% end %>

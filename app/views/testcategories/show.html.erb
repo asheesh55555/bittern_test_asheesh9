@@ -1,0 +1,54 @@
+	<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Testcategoryname:</strong>
+  <%= @testcategory.testcategoryname %>
+
+</p>
+
+<p>
+
+  <% @testcategory.tests.each do |test| %>
+    <strong>Test Name:</strong><%= test.testname %>
+
+
+
+<p>
+  <% i = 1%>
+  <% test.questions.each do |question| %>
+  <strong>Question <%=i%>:<%=question.qname%>,,</strong>
+   <% i = i+1%>
+  <%#= test.testname %>
+
+
+
+
+<p>
+  <% x = 1%>
+  <% question.answers.each do |answer| %>
+  <%if answer.aname == "1"%>
+  <strong>Answer <%=x%>:<%=answer.ansname%>(right),,</strong>
+  <%else%>
+   <strong>Answer <%=x%>:<%=answer.ansname%>(wrong),,</strong>
+  <%end%>
+   <% x = x+1%>
+  <%#= test.testname %>
+
+<%end%>
+</p>
+
+
+
+
+
+
+<%end%>
+</p>
+
+
+
+<%end%>
+</p>
+
+<%= link_to 'Edit', edit_testcategory_path(@testcategory) %> |
+<%= link_to 'Back', testcategories_path %>
